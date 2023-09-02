@@ -544,6 +544,14 @@ function myInputData() {
         myMainValidation()
 
     })
+
+    BtnValidate.addEventListener('click', ()=>{
+      clearData()
+      BtnValidate.setAttribute('disabled', true)
+
+    })
+
+  
 }
 
 function getForm() {
@@ -702,6 +710,16 @@ function myMainValidation() {
         BtnValidate.setAttribute('disabled', true)
 
     }
+
+}
+
+function clearData() {
+  inpValidationUser.value='';
+  inpValidationMail.value='';
+  inpValidationPhone.value='';
+  inpValidationAge.value='';
+  inpValidationPass.value='';
+  inpValidationRePass.value='';
 
 }
 
