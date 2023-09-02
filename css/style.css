@@ -1,0 +1,184 @@
+body {
+    overflow: hidden;
+    background-color: #0D0D0D;
+    color: #f9f6f6 !important;
+}
+
+.loadingScreen{
+    z-index: 999;
+    display: flex;
+}
+
+i {
+    cursor: pointer;
+}
+
+#main-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    font-size: 18px;
+    position: fixed;
+    left: -254px;
+    /* left: 0; */
+    top: 0px;
+    min-height: 100vh;
+    transition: left 1s, padding 1s;
+    z-index: 999999;
+
+}
+
+
+.myIconDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #fff;
+    position: fixed;
+    left: 0px;
+    /* left: 250px; */
+    top: 0px;
+    min-height: 100vh;
+    max-width: 80px;
+    transition: left 1s, padding 1s;
+    z-index: 999999;
+
+
+}
+
+.myIconDiv img {
+    width: 100%;
+    height: auto;
+}
+
+#main-nav li {
+    margin-top: 20px;
+    position: relative;
+    top: 700px;
+    transition: top 1s, padding 1s;
+
+
+}
+
+#content1::after {
+    color: #fff;
+    content: "\a";
+    white-space: pre;
+}
+
+.myCopyrights {
+    margin-top: auto;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end !important;
+
+}
+
+#main-nav a {
+    color: #fff !important;
+    padding: 5px !important;
+}
+
+
+.myIcon {
+    color: #0D0D0D;
+    cursor: pointer;
+    transition: left 2s, padding 1s;
+    font-size: 35px;
+    z-index: 999999;
+}
+
+.myCard {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.contentHover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f9f6f6ca;
+    color: #0D0D0D;
+    display: flex;
+    align-items: center;
+    font-size: 26px;
+    font-weight: 600;
+    height: 100%;
+    transition: top 0.5s;
+}
+
+.myCard:hover .contentHover{
+    top: 0;
+}
+
+input{
+    width: 40% !important;
+    background-color: transparent !important;
+}
+
+.myRecipes,.myTags{
+    margin-left: -40px;
+}
+
+
+.myRecipes li,.myTags li{
+    border: #b6effb 5px solid;
+    border-radius: 12px;
+    color: #055160;
+    padding: 4px;
+    margin: 8px;
+    background-color: #b6effb;
+    list-style-type: none;
+}
+
+
+.myTags li{
+    border: #f8d7da 5px solid;
+    color: #842029;
+    background-color: #f8d7da;
+
+}
+/* .myCard.category{
+
+} */
+
+.contentHover.category{
+    display: flex;
+    flex-direction: column;
+    
+}
+.contentHover.category p,.ingrediant p{
+    font-size: 16px;
+text-align: center;
+font-weight: 400 ;
+}
+
+
+
+.ingrediant p{
+text-overflow:ellipsis;
+display: block;
+overflow: hidden;
+white-space: nowrap;
+}
+
+.area h2{
+    cursor: pointer;
+}
+
+.myInputsMsg{
+    background-color: #f5c2c7 !important;
+    color: #842029 !important;
+    font-size: 17px;
+    padding: 20px;
+    text-align: center;
+    border: #f8d7da solid 2px;
+    border-radius: 15px;
+}
