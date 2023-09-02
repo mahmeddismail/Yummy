@@ -3,48 +3,48 @@ let myInputsValidation;
 let myInputsMsg;
 let BtnValidate;
 $(document).ready(() => {
-    searchByName("").then(() => {
-        $(".loadingScreen").fadeOut(500)
-        $("body").css("overflow", "visible")
-    })
+  searchByName("").then(() => {
+    $(".loadingScreen").fadeOut(1000)
+    $("body").css("overflow", "visible")
+  })
 })
 
 $('.myIcon').click(function (e) {
-    if ($('.myReplacement').hasClass('fa-bars')) {
-        openNav()
-        console.log("OPEN");
-    }
+  if ($('.myReplacement').hasClass('fa-bars')) {
+    openNav()
+    console.log("OPEN");
+  }
 
-    else if ($('.myReplacement').hasClass('fa-xmark')) {
-        closeNav()
-        console.log("Close");
-    }
+  else if ($('.myReplacement').hasClass('fa-xmark')) {
+    closeNav()
+    console.log("Close");
+  }
 })
 
 function openNav() {
-    $(".myReplacement").removeClass('fa-solid fa-bars');
-    $(".myReplacement").addClass('fa-solid fa-xmark');
+  $(".myReplacement").removeClass('fa-solid fa-bars');
+  $(".myReplacement").addClass('fa-solid fa-xmark');
 
-    $('.myIcon').css({ "left": "277px" })
-    $('.myIconDiv').css({ "left": "250px" })
-    $('#main-nav').css({ "left": "0" })
-    $('#main-nav li').eq(0).animate({ top: 0 }, 60, () => {
-        $('#main-nav li').eq(1).animate({ top: 0 }, 60, () => {
-            $('#main-nav li').eq(2).animate({ top: 0 }, 60, () => {
-                $('#main-nav li').eq(3).animate({ top: 0 }, 60, () => {
-                    $('#main-nav li').eq(4).animate({ top: 0 }, 60)
-                })
-            })
+  $('.myIcon').css({ "left": "277px" })
+  $('.myIconDiv').css({ "left": "250px" })
+  $('#main-nav').css({ "left": "0" })
+  $('#main-nav li').eq(0).animate({ top: 0 }, 60, () => {
+    $('#main-nav li').eq(1).animate({ top: 0 }, 60, () => {
+      $('#main-nav li').eq(2).animate({ top: 0 }, 60, () => {
+        $('#main-nav li').eq(3).animate({ top: 0 }, 60, () => {
+          $('#main-nav li').eq(4).animate({ top: 0 }, 60)
         })
+      })
     })
+  })
 }
 
 function closeNav() {
-    $(".myReplacement").removeClass('fa-solid fa-xmark');
-    $(".myReplacement").addClass('fa-solid fa-bars');
-    $('.myIcon').css({ "left": "0px" })
-    $('#main-nav').css({ "left": "-254px" })
-    $('.myIconDiv').css({ "left": "0px" })
+  $(".myReplacement").removeClass('fa-solid fa-xmark');
+  $(".myReplacement").addClass('fa-solid fa-bars');
+  $('.myIcon').css({ "left": "0px" })
+  $('#main-nav').css({ "left": "-254px" })
+  $('.myIconDiv').css({ "left": "0px" })
 }
 
 
@@ -58,74 +58,75 @@ let ContactClick = document.getElementById("Contact")
 let mySearchByName;
 let mySearchMeals;
 let mySearchByFirst;
-
+let myInputDisplay = document.querySelector('.myInpRow')
+myInputDisplay.innerHTML = ""
 
 
 mySearchClick.addEventListener('click', async () => {
+  myDisplayRow.innerHTML = ""
+  searchInputs();
+  mySearchByName.addEventListener('keyup', () => {
+    searchByName(mySearchByName.value);
+  });
 
-    searchInputs();
-    myDisplayRow.innerHTML = ""
-    mySearchByName.addEventListener('keyup', () => {
-        searchByName(mySearchByName.value);
-    });
 
-
-    mySearchByFirst.addEventListener('keyup', () => {
-        searchByFirstL(mySearchByFirst.value);
-    });
-    // displaySearch(myMealName);
+  mySearchByFirst.addEventListener('keyup', () => {
+    searchByFirstL(mySearchByFirst.value);
+  });
+  // displaySearch(myMealName);
 
 });
 
 function searchInputs() {
-
-    let cartona = ``
-    closeNav()
-    cartona = `
+  let cartona = ``
+  closeNav()
+  cartona = `
          <input type="text" class="form-control byName" placeholder="Search By Name" aria-describedby="addon-wrapping">
-         <input type="text" class="form-control byFirst" placeholder="Search By Name" aria-describedby="addon-wrapping">
+         <input type="text" class="form-control byFirst" placeholder="Search By First Letter" aria-describedby="addon-wrapping">
          `
-    document.querySelector('.myInpRow').innerHTML = cartona;
-    mySearchByName = document.querySelector('.byName');
-    mySearchByFirst = document.querySelector('.byFirst');
+  myInputDisplay.innerHTML = cartona;
+  mySearchByName = document.querySelector('.byName');
+  mySearchByFirst = document.querySelector('.byFirst');
 }
 
 
 async function searchByName(mealName) {
-    let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
-    let finalrespone = await response.json();
-    let myMeals = finalrespone.meals
-    // console.log(myMeals);
-    displaySearch(myMeals.slice(0, 20)) //HERE   
-    // displayMealsDetails(myMeals) //HERE
+  let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
+  let finalrespone = await response.json();
+  let myMeals = finalrespone.meals
+  // console.log(myMeals);
+  displaySearch(myMeals.slice(0, 20)) //HERE   
+  // displayMealsDetails(myMeals) //HERE
 
 
 }
 
 
 async function searchByFirstL(term) {
-    $('.loadingScreen').fadeIn(500);
+  $('.loadingScreen').fadeIn(1000);
 
-    // term == "" ? term == "a" : "";
-    let Res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${term}`)
-    let finalRes = await Res.json();
-    let myMeal = finalRes.meals
-    // console.log(myMeal);
-    displaySearch(myMeal.slice(0, 20)) //HERE   
-    // displayMealsDetails(myMeals) //HERE
-    $('.loadingScreen').fadeOut(500);
+  // term == "" ? term == "a" : "";
+  let Res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${term}`)
+  let finalRes = await Res.json();
+  let myMeal = finalRes.meals
+  // console.log(myMeal);
+  displaySearch(myMeal.slice(0, 20)) //HERE   
+  // displayMealsDetails(myMeals) //HERE
+  $('.loadingScreen').fadeOut(1000);
 
 }
 
 function displaySearch(meal) {
+  myInputDisplay.innerHTML = ""
+  myDisplayRow.innerHTML = ""
+  $('.loadingScreen').fadeIn(1000);
 
-
-    let cartona = ``
-    if (meal) {
-        for (let i = 0; i < meal.length; i++) {
-            // console.log(meal[i].strMeal, meal[i].strMealThumb);  //HERE
-            cartona +=
-                `
+  let cartona = ``
+  if (meal) {
+    for (let i = 0; i < meal.length; i++) {
+      // console.log(meal[i].strMeal, meal[i].strMealThumb);  //HERE
+      cartona +=
+        `
         <div class="col-md-3">
         <div class="myCard" onclick="getMealDetails('${meal[i].idMeal}')">
           <img src="${meal[i].strMealThumb}" class="img-fluid" alt="">
@@ -136,69 +137,75 @@ function displaySearch(meal) {
       </div>
         
         `
-        }
-
-
-    }
-    else {
-        console.log("NOT FOUND");
     }
 
-    myDisplayRow.innerHTML = cartona;
 
-    $('.loadingScreen').fadeOut(500);
+  }
+  else {
+    console.log("NOT FOUND");
+  }
+
+  myDisplayRow.innerHTML = cartona;
+
+  $('.loadingScreen').fadeOut(1000);
 
 }
 
 
 
 async function getMealDetails(mealID) {
-    $('.loadingScreen').fadeIn(500);
+  $('.loadingScreen').fadeIn(1000);
 
-    closeNav();
-    myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
+  myDisplayRow.innerHTML = ""
+  $('.loadingScreen').fadeIn(1000);
 
-    let res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`);
-    let finalres = await res.json()
-    let myMeals = finalres.meals
+  closeNav();
 
-    // console.log(displayMealsDetails(myMeals[0]));
-    displayMealsDetails(myMeals[0])
-    $('.loadingScreen').fadeOut(500);
+  let res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`);
+  let finalres = await res.json()
+  let myMeals = finalres.meals
+
+  // console.log(displayMealsDetails(myMeals[0]));
+  displayMealsDetails(myMeals[0])
+  $('.loadingScreen').fadeOut(1000);
 
 }
 
 
 function displayMealsDetails(meal) {
-    $('.loadingScreen').fadeIn(500);
+  myInputDisplay.innerHTML = ""
+  myDisplayRow.innerHTML = ""
 
-    myDisplayRow.innerHTML = ""
-    let cartona = ``
-    if (meal) {
+  $('.loadingScreen').fadeIn(1000);
 
-        let ingredients = ``
+ 
+  let cartona = ``
+  if (meal) {
 
-        for (let i = 1; i <= 20; i++) {  //HERE
-            if (meal[`strIngredient${i}`]) {
-                ingredients += `<li>${meal[`strMeasure${i}`]} ${meal[`strIngredient${i}`]}</li>`
-            }
-        }
-        let myTag=``;
-        let tagMeal = meal.strTags;
-        if (tagMeal != null) {
-            tagMeal = meal.strTags.split(",")
-            console.log(tagMeal, meal.idMeal);
-            for (let i = 0; i < tagMeal.length; i++) { 
-                myTag += `<li>${tagMeal[i]}</li>`
-            
-            }
-        }
-        else {
-            tagMeal = ' '
-        }
-        // console.log(meal.idMeal);
-        cartona +=
-            `
+    let ingredients = ``
+
+    for (let i = 1; i <= 20; i++) {  //HERE
+      if (meal[`strIngredient${i}`]) {
+        ingredients += `<li>${meal[`strMeasure${i}`]} ${meal[`strIngredient${i}`]}</li>`
+      }
+    }
+    let myTag = ``;
+    let tagMeal = meal.strTags;
+    if (tagMeal != null) {
+      tagMeal = meal.strTags.split(",")
+      console.log(tagMeal, meal.idMeal);
+      for (let i = 0; i < tagMeal.length; i++) {
+        myTag += `<li>${tagMeal[i]}</li>`
+
+      }
+    }
+    else {
+      tagMeal = ' '
+    }
+    // console.log(meal.idMeal);
+    cartona +=
+      `
                 <div class="col-md-4 mx-3">
                 <div class="">
                   <img src="${meal.strMealThumb}" class="img-fluid" alt="">
@@ -258,14 +265,14 @@ function displayMealsDetails(meal) {
                 </div>
               </div>
         `
-        // }
-    }
-    else {
-        console.log("NOT FOUND");
-    }
+    // }
+  }
+  else {
+    console.log("NOT FOUND");
+  }
 
-    myDisplayRow.innerHTML = cartona;
-    $('.loadingScreen').fadeOut(500);
+  myDisplayRow.innerHTML = cartona;
+  $('.loadingScreen').fadeOut(1000);
 
 }
 
@@ -273,29 +280,34 @@ function displayMealsDetails(meal) {
 // CATEGORY/////
 
 myCategoriesClick.addEventListener('click', () => {
-    closeNav()
-    getCategories()
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
+
+  closeNav()
+  getCategories()
 
 })
 
 async function getCategories() {
-    let Res = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
-    let finalRes = await Res.json();
-    let myCategoy = finalRes.categories
-    displayCategories(myCategoy.slice(0, 20)) //HERE   
-    // console.log(myDisplayCategory)
+  let Res = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
+  let finalRes = await Res.json();
+  let myCategoy = finalRes.categories
+  displayCategories(myCategoy.slice(0, 20)) //HERE   
+  // console.log(myDisplayCategory)
 }
 
 
 
 function displayCategories(category) {
-    $('.loadingScreen').fadeIn(500);
+  myInputDisplay.innerHTML = ""
+  myDisplayRow.innerHTML = ""
+  $('.loadingScreen').fadeIn(1000);
 
-    let cartona = ``
-    if (category) {
-        for (let i = 0; i < category.length; i++) {
-            cartona +=
-                `
+  let cartona = ``
+  if (category) {
+    for (let i = 0; i < category.length; i++) {
+      cartona +=
+        `
                 <div class="col-md-3">
                 <div class="myCard category" onclick="filterByCategory('${category[i].strCategory}')">
                   <img src="${category[i].strCategoryThumb}" class="img-fluid" alt="">
@@ -307,31 +319,35 @@ function displayCategories(category) {
                 </div>
               </div>
         `
-            // console.log(category[i].strCategory);
-        }
-
-
-    }
-    else {
-        console.log("NOT FOUND");
+      // console.log(category[i].strCategory);
     }
 
-    myDisplayRow.innerHTML = cartona;
-    $('.loadingScreen').fadeOut(500);
+
+  }
+  else {
+    console.log("NOT FOUND");
+  }
+
+  myDisplayRow.innerHTML = cartona;
+  $('.loadingScreen').fadeOut(1000);
 
 }
 
 async function filterByCategory(categoryName) {
+  $('.loadingScreen').fadeIn(1000);
 
-    closeNav();
-    myDisplayRow.innerHTML = ""
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
 
-    let res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`);
-    let finalres = await res.json()
-    let myCategoryMeals = finalres.meals
+  closeNav();
 
-    console.log(myCategoryMeals);
-    displaySearch(myCategoryMeals.slice(0, 20));
+  let res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`);
+  let finalres = await res.json()
+  let myCategoryMeals = finalres.meals
+
+  console.log(myCategoryMeals);
+  displaySearch(myCategoryMeals.slice(0, 20));
+  $(".loadingScreen").fadeOut(1000)
 
 }
 
@@ -340,31 +356,37 @@ async function filterByCategory(categoryName) {
 
 
 myAreaClick.addEventListener('click', () => {
-    $('.loadingScreen').fadeIn(500);
-    closeNav()
-    getArea()
-    $('.loadingScreen').fadeOut(500);
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
+
+  $('.loadingScreen').fadeIn(1000);
+  closeNav()
+  getArea()
+  $('.loadingScreen').fadeOut(1000);
 
 })
 
 
 async function getArea() {
-    let Res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
-    let finalRes = await Res.json();
-    let myArea = finalRes.meals
-    displayAreas(myArea.slice(0, 20)) //HERE   
-    // console.log(myArea)
+  let Res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
+  let finalRes = await Res.json();
+  let myArea = finalRes.meals
+  displayAreas(myArea.slice(0, 20)) //HERE   
+  // console.log(myArea)
 }
 
 function displayAreas(area) {
-    closeNav();
-    $('.loadingScreen').fadeIn(500);
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
 
-    let cartona = ``
-    if (area) {
-        for (let i = 0; i < area.length; i++) {
-            cartona +=
-                `
+  closeNav();
+  $('.loadingScreen').fadeIn(1000);
+
+  let cartona = ``
+  if (area) {
+    for (let i = 0; i < area.length; i++) {
+      cartona +=
+        `
                
                 <div class="col-md-3">
           <div class="Area text-white text-center" onclick="filterByArea('${area[i].strArea}')">
@@ -375,59 +397,63 @@ function displayAreas(area) {
         </div>
       </div>
         `
-        }
-
-
-    }
-    else {
-        console.log("NOT FOUND");
     }
 
-    myDisplayRow.innerHTML = cartona;
-    $('.loadingScreen').fadeOut(500);
+
+  }
+  else {
+    console.log("NOT FOUND");
+  }
+
+  myDisplayRow.innerHTML = cartona;
+  $('.loadingScreen').fadeOut(1000);
 
 }
 
 async function filterByArea(AreaName) {
 
-    closeNav();
-    myDisplayRow.innerHTML = ""
+  closeNav();
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
 
-    let res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${AreaName}`);
-    let finalres = await res.json()
-    let myAreaMeals = finalres.meals
+  let res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${AreaName}`);
+  let finalres = await res.json()
+  let myAreaMeals = finalres.meals
 
-    console.log(myAreaMeals);
-    displaySearch(myAreaMeals.slice(0, 20));
+  console.log(myAreaMeals);
+  displaySearch(myAreaMeals.slice(0, 20));
 
 }
 
 
 // Ingrediants
 ingrediantsClick.addEventListener('click', () => {
-    closeNav()
-    getIngrediant()
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
+
+  closeNav()
+  getIngrediant()
 
 })
 
 
 async function getIngrediant() {
-    $('.loadingScreen').fadeIn(500);
+  $('.loadingScreen').fadeIn(1000);
 
-    let res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
-    let finalRes = await res.json()
-    let myIngrediants = finalRes.meals
-    console.log(myIngrediants);
-    displayIngredients(myIngrediants.slice(0, 20))
+  let res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
+  let finalRes = await res.json()
+  let myIngrediants = finalRes.meals
+  console.log(myIngrediants);
+  displayIngredients(myIngrediants.slice(0, 20))
 }
 
 function displayIngredients(ingrediants) {
-    $('.loadingScreen').fadeIn(500);
+  $('.loadingScreen').fadeIn(1000);
 
-    myDisplayRow.innerHTML = ``
-    let cartona = ``
-    for (let i = 0; i < ingrediants.length; i++) {
-        cartona += `
+  myDisplayRow.innerHTML = ``
+  let cartona = ``
+  for (let i = 0; i < ingrediants.length; i++) {
+    cartona += `
     <div class="col-md-3">
     <div class="ingrediant text-white text-center" onclick="filterByIngrediant('${ingrediants[i].strIngredient}')">
       <i class="fa-solid fa-drumstick-bite fa-4x"></i>            <div class="area my-1">
@@ -437,24 +463,24 @@ function displayIngredients(ingrediants) {
     </div>
   </div>
     `
-    }
-    myDisplayRow.innerHTML = cartona
-    $('.loadingScreen').fadeOut(500);
+  }
+  myDisplayRow.innerHTML = cartona
+  $('.loadingScreen').fadeOut(1000);
 
 }
 
 async function filterByIngrediant(IngrediantName) {
-    $('.loadingScreen').fadeIn(500);
-    closeNav();
-    myDisplayRow.innerHTML = ""
+  $('.loadingScreen').fadeIn(1000);
+  closeNav();
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
+  let res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${IngrediantName}`);
+  let finalres = await res.json()
+  let myIngredianMeals = finalres.meals
 
-    let res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${IngrediantName}`);
-    let finalres = await res.json()
-    let myIngredianMeals = finalres.meals
-
-    // console.log(myIngredianMeals);
-    displaySearch(myIngredianMeals.slice(0, 20));
-    $('.loadingScreen').fadeOut(500);
+  // console.log(myIngredianMeals);
+  displaySearch(myIngredianMeals.slice(0, 20));
+  $('.loadingScreen').fadeOut(1000);
 
 
 }
@@ -484,79 +510,82 @@ let rePasswordTouch = false;
 
 
 ContactClick.addEventListener('click', () => {
-    closeNav();
-    console.log("HI");
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
+  closeNav();
+  console.log("HI");
 
 
-    getForm()
-    myInputsValidation = document.querySelectorAll('.inpValidation')
-    myInputsMsg = document.querySelectorAll('.myInputsMsg')
-    inpValidationUser = document.querySelector('.inpValidationUser')
-    inpValidationMail = document.querySelector('.inpValidationMail')
-    inpValidationPhone = document.querySelector('.inpValidationPhone')
-    inpValidationAge = document.querySelector('.inpValidationAge')
-    inpValidationPass = document.querySelector('.inpValidationPass')
-    inpValidationRePass = document.querySelector('.inpValidationRePass')
-    MsgUser = document.querySelector('.MsgUser')
-    MsgEmail = document.querySelector('.MsgEmail')
-    MsgPhone = document.querySelector('.MsgPhone')
-    MsgAge = document.querySelector('.MsgAge')
-    MsgPassword = document.querySelector('.MsgPassword')
-    MsgRePassword = document.querySelector('.MsgRePassword')
-    BtnValidate = document.getElementById('myBtnValidate')
-    myInputData()
+  getForm()
+  myInputsValidation = document.querySelectorAll('.inpValidation')
+  myInputsMsg = document.querySelectorAll('.myInputsMsg')
+  inpValidationUser = document.querySelector('.inpValidationUser')
+  inpValidationMail = document.querySelector('.inpValidationMail')
+  inpValidationPhone = document.querySelector('.inpValidationPhone')
+  inpValidationAge = document.querySelector('.inpValidationAge')
+  inpValidationPass = document.querySelector('.inpValidationPass')
+  inpValidationRePass = document.querySelector('.inpValidationRePass')
+  MsgUser = document.querySelector('.MsgUser')
+  MsgEmail = document.querySelector('.MsgEmail')
+  MsgPhone = document.querySelector('.MsgPhone')
+  MsgAge = document.querySelector('.MsgAge')
+  MsgPassword = document.querySelector('.MsgPassword')
+  MsgRePassword = document.querySelector('.MsgRePassword')
+  BtnValidate = document.getElementById('myBtnValidate')
+  myInputData()
 
 })
 
 
 function myInputData() {
-    inpValidationUser.addEventListener('keyup', () => {
-        userTouch = true;
-        myMainValidation()
-    })
+  inpValidationUser.addEventListener('keyup', () => {
+    userTouch = true;
+    myMainValidation()
+  })
 
-    inpValidationMail.addEventListener('keyup', () => {
-        emailTouch = true;
-        myMainValidation()
+  inpValidationMail.addEventListener('keyup', () => {
+    emailTouch = true;
+    myMainValidation()
 
-    })
+  })
 
-    inpValidationPhone.addEventListener('keyup', () => {
-        phoneTouch = true;
-        myMainValidation()
+  inpValidationPhone.addEventListener('keyup', () => {
+    phoneTouch = true;
+    myMainValidation()
 
-    })
+  })
 
-    inpValidationAge.addEventListener('keyup', () => {
-        ageTouch = true;
-        myMainValidation()
+  inpValidationAge.addEventListener('keyup', () => {
+    ageTouch = true;
+    myMainValidation()
 
-    })
+  })
 
-    inpValidationPass.addEventListener('keyup', () => {
-        passwordTouch = true;
-        myMainValidation()
+  inpValidationPass.addEventListener('keyup', () => {
+    passwordTouch = true;
+    myMainValidation()
 
-    })
+  })
 
-    inpValidationRePass.addEventListener('keyup', () => {
-        rePasswordTouch = true;
-        myMainValidation()
+  inpValidationRePass.addEventListener('keyup', () => {
+    rePasswordTouch = true;
+    myMainValidation()
 
-    })
+  })
 
-    BtnValidate.addEventListener('click', ()=>{
-      clearData()
-      BtnValidate.setAttribute('disabled', true)
+  BtnValidate.addEventListener('click', () => {
+    clearData()
+    BtnValidate.setAttribute('disabled', true)
 
-    })
+  })
 
-  
+
 }
 
 function getForm() {
-    myDisplayRow.innerHTML = ""
-    let cartona = `
+  myDisplayRow.innerHTML = ""
+  myInputDisplay.innerHTML = ""
+  let cartona = `
     <div class="col-md-6  text-center d-flex flex-column justify-content-center align-items-center mx-auto">
     <input  type="text" id="userName" class="form-control bg-white w-75 inpValidationUser" aria-describedby=""
       placeholder="Enter your Name" name="userName">
@@ -617,7 +646,7 @@ function getForm() {
   </div>
     `
 
-    myDisplayRow.innerHTML = cartona
+  myDisplayRow.innerHTML = cartona
 
 
 }
@@ -638,117 +667,117 @@ let myIconMarked = document.querySelectorAll('.myIconMarked')
 
 
 function myMainValidation() {
-    if (userTouch) {
-        if (UserValidation()) {
-            MsgUser.classList.replace('d-block', 'd-none')
-        }
-        else {
-            MsgUser.classList.replace('d-none', 'd-block')
-
-        }
-    }
-
-    if (emailTouch) {
-        if (MailValidation()) {
-            MsgEmail.classList.replace('d-block', 'd-none')
-        }
-        else {
-            MsgEmail.classList.replace('d-none', 'd-block')
-
-        }
-    }
-
-
-    if (ageTouch) {
-        if (AgeValidation()) {
-            MsgAge.classList.replace('d-block', 'd-none')
-        }
-        else {
-            MsgAge.classList.replace('d-none', 'd-block')
-
-        }
-    }
-
-    if (phoneTouch) {
-        if (PhoneValidation()) {
-            MsgPhone.classList.replace('d-block', 'd-none')
-        }
-        else {
-            MsgPhone.classList.replace('d-none', 'd-block')
-
-        }
-    }
-
-
-    if (passwordTouch) {
-        if (passwordValidation()) {
-            MsgPassword.classList.replace('d-block', 'd-none')
-        }
-        else {
-            MsgPassword.classList.replace('d-none', 'd-block')
-
-        }
-    }
-
-    if (rePasswordTouch) {
-        if (rePassValidation()) {
-            MsgRePassword.classList.replace('d-block', 'd-none')
-
-        }
-        else {
-            MsgRePassword.classList.replace('d-none', 'd-block')
-
-        }
-    }
-
-
-    if (UserValidation() && MailValidation() && PhoneValidation()
-        && AgeValidation() && passwordValidation() && rePassValidation()) {
-        BtnValidate.removeAttribute('disabled')
+  if (userTouch) {
+    if (UserValidation()) {
+      MsgUser.classList.replace('d-block', 'd-none')
     }
     else {
-        BtnValidate.setAttribute('disabled', true)
+      MsgUser.classList.replace('d-none', 'd-block')
 
     }
+  }
+
+  if (emailTouch) {
+    if (MailValidation()) {
+      MsgEmail.classList.replace('d-block', 'd-none')
+    }
+    else {
+      MsgEmail.classList.replace('d-none', 'd-block')
+
+    }
+  }
+
+
+  if (ageTouch) {
+    if (AgeValidation()) {
+      MsgAge.classList.replace('d-block', 'd-none')
+    }
+    else {
+      MsgAge.classList.replace('d-none', 'd-block')
+
+    }
+  }
+
+  if (phoneTouch) {
+    if (PhoneValidation()) {
+      MsgPhone.classList.replace('d-block', 'd-none')
+    }
+    else {
+      MsgPhone.classList.replace('d-none', 'd-block')
+
+    }
+  }
+
+
+  if (passwordTouch) {
+    if (passwordValidation()) {
+      MsgPassword.classList.replace('d-block', 'd-none')
+    }
+    else {
+      MsgPassword.classList.replace('d-none', 'd-block')
+
+    }
+  }
+
+  if (rePasswordTouch) {
+    if (rePassValidation()) {
+      MsgRePassword.classList.replace('d-block', 'd-none')
+
+    }
+    else {
+      MsgRePassword.classList.replace('d-none', 'd-block')
+
+    }
+  }
+
+
+  if (UserValidation() && MailValidation() && PhoneValidation()
+    && AgeValidation() && passwordValidation() && rePassValidation()) {
+    BtnValidate.removeAttribute('disabled')
+  }
+  else {
+    BtnValidate.setAttribute('disabled', true)
+
+  }
 
 }
 
 function clearData() {
-  inpValidationUser.value='';
-  inpValidationMail.value='';
-  inpValidationPhone.value='';
-  inpValidationAge.value='';
-  inpValidationPass.value='';
-  inpValidationRePass.value='';
+  inpValidationUser.value = '';
+  inpValidationMail.value = '';
+  inpValidationPhone.value = '';
+  inpValidationAge.value = '';
+  inpValidationPass.value = '';
+  inpValidationRePass.value = '';
 
 }
 
 
 
 function UserValidation() {
-    return RegexUserName.test(inpValidationUser.value)
+  return RegexUserName.test(inpValidationUser.value)
 }
 
 function MailValidation() {
-    return RegexEmail.test(inpValidationMail.value)
+  return RegexEmail.test(inpValidationMail.value)
 }
 
 
 function PhoneValidation() {
-    return RegexPhoneNumber.test(inpValidationPhone.value)
+  return RegexPhoneNumber.test(inpValidationPhone.value)
 }
 
 function AgeValidation() {
-    return RegexAge.test(inpValidationAge.value)
+  return RegexAge.test(inpValidationAge.value)
 }
 
 
 function passwordValidation() {
-    return RegexPassword.test(inpValidationPass.value)
+  return RegexPassword.test(inpValidationPass.value)
 }
 
 function rePassValidation() {
-    return inpValidationRePass.value == inpValidationPass.value
+  return inpValidationRePass.value == inpValidationPass.value
 }
 
 
