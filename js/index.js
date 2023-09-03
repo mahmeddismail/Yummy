@@ -81,8 +81,8 @@ function searchInputs() {
   let cartona = ``
   closeNav()
   cartona = `
-         <input type="text" class="form-control byName" placeholder="Search By Name" aria-describedby="addon-wrapping">
-         <input type="text" class="form-control byFirst" placeholder="Search By First Letter" aria-describedby="addon-wrapping">
+         <input type="text" class="form-control byName text-white" placeholder="Search By Name" aria-describedby="addon-wrapping">
+         <input type="text" class="form-control byFirst text-white" placeholder="Search By First Letter" aria-describedby="addon-wrapping">
          `
   myInputDisplay.innerHTML = cartona;
   mySearchByName = document.querySelector('.byName');
@@ -103,7 +103,6 @@ async function searchByName(mealName) {
 
 
 async function searchByFirstL(term) {
-  $('.loadingScreen').fadeIn(1000);
 
   // term == "" ? term == "a" : "";
   let Res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${term}`)
@@ -117,9 +116,7 @@ async function searchByFirstL(term) {
 }
 
 function displaySearch(meal) {
-  myInputDisplay.innerHTML = ""
   myDisplayRow.innerHTML = ""
-  $('.loadingScreen').fadeIn(1000);
 
   let cartona = ``
   if (meal) {
@@ -154,11 +151,9 @@ function displaySearch(meal) {
 
 
 async function getMealDetails(mealID) {
-  $('.loadingScreen').fadeIn(1000);
 
   myInputDisplay.innerHTML = ""
   myDisplayRow.innerHTML = ""
-  $('.loadingScreen').fadeIn(1000);
 
   closeNav();
 
@@ -177,7 +172,6 @@ function displayMealsDetails(meal) {
   myInputDisplay.innerHTML = ""
   myDisplayRow.innerHTML = ""
 
-  $('.loadingScreen').fadeIn(1000);
 
  
   let cartona = ``
@@ -301,7 +295,6 @@ async function getCategories() {
 function displayCategories(category) {
   myInputDisplay.innerHTML = ""
   myDisplayRow.innerHTML = ""
-  $('.loadingScreen').fadeIn(1000);
 
   let cartona = ``
   if (category) {
@@ -334,7 +327,6 @@ function displayCategories(category) {
 }
 
 async function filterByCategory(categoryName) {
-  $('.loadingScreen').fadeIn(1000);
 
   myDisplayRow.innerHTML = ""
   myInputDisplay.innerHTML = ""
@@ -359,7 +351,6 @@ myAreaClick.addEventListener('click', () => {
   myDisplayRow.innerHTML = ""
   myInputDisplay.innerHTML = ""
 
-  $('.loadingScreen').fadeIn(1000);
   closeNav()
   getArea()
   $('.loadingScreen').fadeOut(1000);
@@ -380,7 +371,6 @@ function displayAreas(area) {
   myInputDisplay.innerHTML = ""
 
   closeNav();
-  $('.loadingScreen').fadeIn(1000);
 
   let cartona = ``
   if (area) {
@@ -438,7 +428,6 @@ ingrediantsClick.addEventListener('click', () => {
 
 
 async function getIngrediant() {
-  $('.loadingScreen').fadeIn(1000);
 
   let res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
   let finalRes = await res.json()
@@ -448,7 +437,6 @@ async function getIngrediant() {
 }
 
 function displayIngredients(ingrediants) {
-  $('.loadingScreen').fadeIn(1000);
 
   myDisplayRow.innerHTML = ``
   let cartona = ``
@@ -470,7 +458,6 @@ function displayIngredients(ingrediants) {
 }
 
 async function filterByIngrediant(IngrediantName) {
-  $('.loadingScreen').fadeIn(1000);
   closeNav();
   myDisplayRow.innerHTML = ""
   myInputDisplay.innerHTML = ""
