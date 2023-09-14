@@ -247,18 +247,16 @@ function displayMealsDetails(meal) {
                     </div>
 
                     <div class="btns d-flex">
-                      <form action="${meal.strSource}" target="_blank">
-                        <button class="btn btn-success">Source</button>
-                      </form>
+                        <div>
+                              <a href="${meal.strSource}" class="btn btn-success py-2" target="_blank">Source</a>
+                        </div>
 
-                     <form>
-          
-                        <button class="btn btn-danger mx-2">Youtube
-                              <a href="${meal.strYoutube}" target="_blank">
                         
-                              </a>
-                        </button>
-                         </form>
+                        <div>
+                              <a href="${meal.strYoutube}" class="btn btn-danger mx-2 py-2" target="_blank">Youtube</a>
+                        </div>
+
+                        
                     </div>
                   </div>
                 </div>
