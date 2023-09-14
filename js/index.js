@@ -251,11 +251,14 @@ function displayMealsDetails(meal) {
                         <button class="btn btn-success">Source</button>
                       </form>
 
+                     <form>
+          
                         <button class="btn btn-danger mx-2">Youtube
                               <a href="${meal.strYoutube}" target="_blank">
                         
                               </a>
                         </button>
+                         </form>
                     </div>
                   </div>
                 </div>
