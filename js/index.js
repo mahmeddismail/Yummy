@@ -124,7 +124,7 @@ function displaySearch(meal) {
       // console.log(meal[i].strMeal, meal[i].strMealThumb);  //HERE
       cartona +=
         `
-        <div class="col-md-3">
+        <div class="col-lg-3">
         <div class="myCard" onclick="getMealDetails('${meal[i].idMeal}')">
           <img src="${meal[i].strMealThumb}" class="img-fluid" alt="">
           <div class="contentHover">
